@@ -8,6 +8,7 @@
 #define  DLFminus(maxNuber,mixNuber)   ABS((maxNuber-mixNuber))
 #define DLFColor(r, g, b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
 #import "DLFRulerScrollView.h"
+
 static CGFloat  labelFont =  12.0;
 static CGFloat  heightTolabel = 15.0;
 
@@ -34,7 +35,7 @@ static CGFloat  heightTolabel = 15.0;
         //水平方向
         if (_rulerViewShowType == rulerViewshowHorizontalType) {
             _rulerImage = [UIImage imageNamed:@"ruler_width"];
-            self.contentSize = CGSizeMake( _rulerImage.size.width* ((DLFminus(_maxValue , _minValue)/ _rulerMultiple) +1), self.frame.size.height );
+            self.contentSize = CGSizeMake( _rulerImage.size.width*((DLFminus(_maxValue , _minValue)/ _rulerMultiple) +1), self.frame.size.height );
         }else{
             _rulerImage = [UIImage imageNamed:@"ruler_height"];
             self.contentSize  = CGSizeMake(self.frame.size.width, _rulerImage.size.height* ((DLFminus(_maxValue , _minValue)/ _rulerMultiple) +1));
@@ -44,6 +45,7 @@ static CGFloat  heightTolabel = 15.0;
     return self;
 }
 -(void)addImageView{
+    
     for (int  i= 0; i<=DLFminus(_maxValue, _minValue)/_rulerMultiple; i++) {
         UIImageView *imageView = [[UIImageView alloc]initWithImage:_rulerImage];
         imageView.tag = i;
@@ -51,7 +53,7 @@ static CGFloat  heightTolabel = 15.0;
         //创建对应的数字的Label
         UILabel *rulerLable= [[UILabel alloc]init];
         rulerLable.textAlignment=NSTextAlignmentCenter;
-        rulerLable.text=[NSString stringWithFormat:@"%.0f",_minValue+i*_rulerMultiple];
+        rulerLable.text=[NSString stringWithFormat:@"%.0f",_minValue + i*_rulerMultiple];
         rulerLable.textColor=DLFColor(204, 204, 204);
         rulerLable.font=[UIFont systemFontOfSize:labelFont];
         [self addSubview:rulerLable];
@@ -82,12 +84,12 @@ static CGFloat  heightTolabel = 15.0;
             CGFloat LableY;
             if (_rulerViewShowType == rulerViewshowHorizontalType) {  //水平方向
                 LableW = 60;
-                LableH =  20;
+                LableH = 20;
                 LableX = centerPoint.x - LableW/2;
                 LableY = imageViewH+ heightTolabel;
             }else{
                 LableW = 60;
-                LableH =  30;
+                LableH = 30;
                 LableX=imageViewW-heightTolabel;   //>???
                 LableY=centerPoint.y-LableH/2;
             }

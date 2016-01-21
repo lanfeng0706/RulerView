@@ -9,7 +9,19 @@
 #import "DLFViewController.h"
 #import "DLFRulerView.h"
 
+/** rulerMultiple参数为控制缩放比 */
 static CGFloat const rulerMultiple=10;
+
+/** 最大刻度值 */
+static CGFloat const maxValue = 500;
+
+/** 最小刻度值 */
+static CGFloat const minValue = 100;
+
+/** 默认刻度值 */
+static CGFloat const defatuleValue = 120;
+
+
 @interface DLFViewController ()<DLFRulerViewDelegate>
 @property(nonatomic,strong)UILabel *valueLable;
 @property(nonatomic,strong)DLFRulerView *rulerview;
@@ -20,23 +32,27 @@ static CGFloat const rulerMultiple=10;
 - (void)viewDidLoad {
     [super viewDidLoad];
     CGRect rect1=CGRectMake(20, 200, self.view.frame.size.width-40, 55);
-    DLFRulerView *rulerView = [[DLFRulerView alloc]initWithmaxValue:200 minValue:20 rulerViewShowType: rulerViewshowHorizontalType andRulerMultiple:rulerMultiple];
+    DLFRulerView *rulerView = [[DLFRulerView alloc]initWithmaxValue:maxValue
+                                                           minValue:minValue
+                                                  rulerViewShowType: rulerViewshowHorizontalType
+                                                   andRulerMultiple:rulerMultiple];
     _rulerview = rulerView;
-    rulerView.defaultValue = 90;
-//    rulerView.backgroundColor = [UIColor orangeColor]; 
+    rulerView.defaultValue = defatuleValue;
+//  rulerView.backgroundColor = [UIColor orangeColor];
     rulerView.clipsToBounds = YES;
     rulerView.frame = rect1;
     rulerView.delegate = self;
     [self.view addSubview:rulerView];
-    
-    
     
     UIButton *statusBtn=[UIButton buttonWithType:UIButtonTypeCustom];
     statusBtn.backgroundColor=[UIColor redColor];
     statusBtn.frame=CGRectMake(self.view.frame.size.width-80, 60, 40, 40);
     [statusBtn setTitle:@"垂直" forState:UIControlStateNormal];
     [statusBtn setTitle:@"水平" forState:UIControlStateSelected];
-    [statusBtn addTarget:self action:@selector(changeRulerShowType:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [statusBtn addTarget:self
+                  action:@selector(changeRulerShowType:)
+        forControlEvents:UIControlEventTouchUpInside];
     [self.view  addSubview:statusBtn];
     
     UILabel *valueLable=[[UILabel alloc] init];
@@ -44,7 +60,7 @@ static CGFloat const rulerMultiple=10;
     valueLable.font=[UIFont systemFontOfSize:18];
     valueLable.frame=CGRectMake(20, 60, 150, 80);
     valueLable.textColor=[UIColor blackColor];
-    valueLable.text=@"0";
+    valueLable.text= [NSString stringWithFormat:@"%f",defatuleValue];
     [self.view  addSubview:valueLable];
 
 }
@@ -55,18 +71,18 @@ static CGFloat const rulerMultiple=10;
     CGRect rect1=CGRectMake(20,200, self.view.frame.size.width-40, 50);
     CGRect rect2=CGRectMake(150, 50, 50, self.view.frame.size.height-100);
     if ( button.selected) {
-       _rulerview = [[DLFRulerView alloc]initWithmaxValue:500 minValue:40 rulerViewShowType: rulerViewshowVerticalType andRulerMultiple:rulerMultiple];
+       _rulerview = [[DLFRulerView alloc]initWithmaxValue:maxValue minValue:minValue rulerViewShowType: rulerViewshowVerticalType andRulerMultiple:rulerMultiple];
         _rulerview.frame=rect2;
         _rulerview.clipsToBounds = YES;
     }else{
         [_rulerview removeFromSuperview];
-        _rulerview=[[DLFRulerView alloc]initWithmaxValue:500 minValue:40 rulerViewShowType: rulerViewshowHorizontalType andRulerMultiple:rulerMultiple];
+        _rulerview=[[DLFRulerView alloc]initWithmaxValue:maxValue  minValue:minValue rulerViewShowType: rulerViewshowHorizontalType andRulerMultiple:rulerMultiple];
         _rulerview.frame=rect1;
         _rulerview.clipsToBounds = YES;
     }
-    _rulerview.delegate=self;
-    _rulerview.defaultValue=85;
-    _rulerview.backgroundColor=[UIColor yellowColor];
+    _rulerview.delegate = self;
+    _rulerview.defaultValue = defatuleValue;
+    _rulerview.backgroundColor = [UIColor yellowColor];
     [self.view  addSubview:_rulerview];
     
 }

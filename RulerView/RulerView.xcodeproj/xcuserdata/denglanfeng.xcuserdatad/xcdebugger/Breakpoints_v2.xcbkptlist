@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RulerView/DLFRulerScrollView.m"
-            timestampString = "463564881.663124"
+            timestampString = "474989502.230308"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "-layoutSubviews"
             landmarkType = "5">
          </BreakpointContent>
